@@ -2,8 +2,8 @@ package com.example.alura.forum.controller;
 
 import com.example.alura.forum.domain.user.User;
 import com.example.alura.forum.domain.user.dto.AuthenticationDTO;
-import com.example.alura.forum.infra.security.TokenJWTDTO;
-import com.example.alura.forum.infra.security.TokenService;
+import com.example.alura.forum.infra.security.token.TokenJWTDTO;
+import com.example.alura.forum.infra.security.token.TokenService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
