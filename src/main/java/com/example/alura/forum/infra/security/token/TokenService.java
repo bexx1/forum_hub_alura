@@ -1,4 +1,4 @@
-package com.example.alura.forum.infra.security;
+package com.example.alura.forum.infra.security.token;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
