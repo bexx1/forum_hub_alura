@@ -13,7 +13,7 @@ import java.util.Collection;
 import java.util.List;
 
 @Table(name = "users")
-@Entity(name = "user")
+@Entity(name = "User")
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
@@ -24,6 +24,7 @@ public class User implements UserDetails {
     private Long Id;
     private String username;
     private String password;
+    private String name;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
