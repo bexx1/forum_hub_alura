@@ -1,12 +1,21 @@
 package com.example.alura.forum.domain.topic;
 
 import com.example.alura.forum.domain.user.User;
+import com.example.alura.forum.domain.user.dto.UserDetailsDTO;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
 @Table(name = "topics")
 @Entity(name = "Topic")
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(of = "id")
 public class Topic {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
