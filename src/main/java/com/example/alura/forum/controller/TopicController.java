@@ -55,4 +55,10 @@ public class TopicController {
         var topics = repository.findAll().stream().map(TopicDetailsDTO::new).collect(Collectors.toList());
         return ResponseEntity.ok(topics);
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity detail(@PathVariable Long id) {
+        var topic = repository.getReferenceById(id);
+        return ResponseEntity.ok(new TopicDetailsDTO(topic));
+    }
 }
