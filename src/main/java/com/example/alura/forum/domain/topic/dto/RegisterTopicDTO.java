@@ -5,11 +5,11 @@ import jakarta.validation.constraints.NotBlank;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public record RegisterTopicDTO(
-        @NotBlank
+        @NotBlank(message = "The title is mandatory")
         String title,
-        @NotBlank
+        @NotBlank(message = "The message is mandatory")
         String message,
-        @NotBlank
+        @NotBlank(message = "The course is mandatory")
         String course
         ) {
 }
