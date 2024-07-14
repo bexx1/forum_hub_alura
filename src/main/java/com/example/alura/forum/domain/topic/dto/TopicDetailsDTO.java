@@ -17,7 +17,7 @@ public record TopicDetailsDTO(
         String course
 ) {
 
-    public TopicDetailsDTO(Topic topic, UserDetailsDTO userDetails) {
-        this(topic.getId(), topic.getTitle(), topic.getMessage(), topic.getCreationDate(), topic.getStatus(), userDetails, topic.getCourse());
+    public TopicDetailsDTO(Topic topic) {
+        this(topic.getId(), topic.getTitle(), topic.getMessage(), topic.getCreationDate(), topic.getStatus(), new UserDetailsDTO(topic.getAuthor().getId(), topic.getAuthor().getName()), topic.getCourse());
     }
 }

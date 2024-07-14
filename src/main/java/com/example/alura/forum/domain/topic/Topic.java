@@ -25,6 +25,7 @@ public class Topic {
     @Column(unique = true)
     private String message;
     private LocalDateTime creationDate;
+    @Enumerated(EnumType.STRING)
     private Status status;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
