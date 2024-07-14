@@ -5,6 +5,7 @@ import com.example.alura.forum.domain.topic.Topic;
 import com.example.alura.forum.domain.topic.TopicRepository;
 import com.example.alura.forum.domain.topic.dto.RegisterTopicDTO;
 import com.example.alura.forum.domain.topic.dto.TopicDetailsDTO;
+import com.example.alura.forum.domain.topic.dto.UpdateTopicDTO;
 import com.example.alura.forum.domain.user.User;
 import com.example.alura.forum.domain.user.UserRepository;
 import com.example.alura.forum.infra.security.token.TokenService;
@@ -16,6 +17,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -60,5 +62,19 @@ public class TopicController {
     public ResponseEntity detail(@PathVariable Long id) {
         var topic = repository.getReferenceById(id);
         return ResponseEntity.ok(new TopicDetailsDTO(topic));
+    }
+
+    @PutMapping
+    @Transactional
+    public ResponseEntity update(@RequestBody @Valid UpdateTopicDTO data) {
+        var topic = repository.findById(data.id());
+        if (topic.isPresent()) {
+            var topicFound = topic.get();
+            topicFound.update(data);
+
+            return ResponseEntity.ok(new TopicDetailsDTO(topicFound));
+        }
+
+        return ResponseEntity.notFound().build();
     }
 }

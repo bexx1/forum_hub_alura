@@ -1,7 +1,7 @@
 package com.example.alura.forum.domain.topic;
 
+import com.example.alura.forum.domain.topic.dto.UpdateTopicDTO;
 import com.example.alura.forum.domain.user.User;
-import com.example.alura.forum.domain.user.dto.UserDetailsDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -39,5 +39,17 @@ public class Topic {
         this.author = author;
         this.status = status;
         this.course = course;
+    }
+
+    public void update(UpdateTopicDTO data) {
+        if (data.title() != null) {
+            this.title = data.title();
+        }
+        if (data.message() != null) {
+            this.message = data.message();
+        }
+        if (data.course() != null) {
+            this.course = data.course();
+        }
     }
 }
