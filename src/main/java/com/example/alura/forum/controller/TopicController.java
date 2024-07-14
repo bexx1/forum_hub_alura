@@ -77,4 +77,17 @@ public class TopicController {
 
         return ResponseEntity.notFound().build();
     }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity delete(@PathVariable Long id) {
+        var topic = repository.findById(id);
+        if (topic.isPresent()) {
+            repository.deleteById(id);
+
+            return ResponseEntity.noContent().build();
+        }
+
+        return ResponseEntity.notFound().build();
+    }
 }
