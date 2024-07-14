@@ -42,3 +42,7 @@ After you already have an user and the database ready to go you'll need to log i
     - Put: Here a json very similar to the post one needs to be sent. It can contain the id, title, message and course infos. Only pass what you want to change. The id is mandatory but it cannot be changed.
     - Delete: To delete a topic you'll need to pass in the path the id of the topic. Ex: /topics/1 - will exclude the topic of id 1.
   - The path '/topics/{id}' when used with the method get returns the details of the topic that corresponds to that id.
+
+## Badge
+![Badge-Spring](https://github.com/user-attachments/assets/7e6c14a2-da4b-4cfa-b820-3582de962d44)
+
