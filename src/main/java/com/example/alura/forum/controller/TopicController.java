@@ -7,7 +7,6 @@ import com.example.alura.forum.domain.topic.dto.RegisterTopicDTO;
 import com.example.alura.forum.domain.topic.dto.TopicDetailsDTO;
 import com.example.alura.forum.domain.user.User;
 import com.example.alura.forum.domain.user.UserRepository;
-import com.example.alura.forum.domain.user.dto.UserDetailsDTO;
 import com.example.alura.forum.infra.security.token.TokenService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
@@ -17,13 +16,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/topics")
@@ -44,12 +42,17 @@ public class TopicController {
         var token = request.getHeader("Authorization").replace("Bearer ", "");
         var subject = tokenService.getSubject(token);
         User author = (User) userRepository.findByUsername(subject);
-        UserDetailsDTO userDetails = new UserDetailsDTO(author);
 
         Topic topic = new Topic(registerTopicDTO.title(), registerTopicDTO.message(), LocalDateTime.now(), author, Status.ACTIVE, registerTopicDTO.course());
         repository.save(topic);
 
         var uri = uriBuilder.path("/topics/{id}").buildAndExpand(topic.getId()).toUri();
-        return ResponseEntity.created(uri).body(new TopicDetailsDTO(topic, userDetails));
+        return ResponseEntity.created(uri).body(new TopicDetailsDTO(topic));
+    }
+
+    @GetMapping
+    public ResponseEntity<List<TopicDetailsDTO>> list() {
+        var topics = repository.findAll().stream().map(TopicDetailsDTO::new).collect(Collectors.toList());
+        return ResponseEntity.ok(topics);
     }
 }
